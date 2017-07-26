@@ -3,6 +3,36 @@ body, div {
   margin:0;
   font-family: 'Indie Flower', cursive;
   background-color: lightblue;
+  border: 1px solid red;
 }
 
+#title {
+  margin: auto;
+  font-size: 80px;
+  text-align: center;
+}
 
+#settings {
+  margin: auto;
+  width: 600px;
+  height: 100px;
+  background-color: yellow;
+}
+
+#pomodoro {
+  margin: auto;
+  width: 600px;
+  height: 400px;
+  
+}
+
+#pomodoro img {
+  display: block;
+  margin: auto;
+  margin-top: 50px;
+  
+}
+
+#tomato {
+  font-size: 40px;
+}
