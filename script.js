@@ -5,8 +5,9 @@ $(document).ready(function(){
     var breakLength = 5;
     var timerStarted = false;
     var timerIsRunning = false;
+    var isBreakTime = false;
 
-    $("#tomato").text(session + ":00");
+    displayTomatoClock();
 
     // Session and Break minutes settings
     $("#settings button").click(function() {
@@ -27,29 +28,47 @@ $(document).ready(function(){
             breakLength++;
             $("#btotal").text(breakLength);
         }
-        $("#tomato").text(session + ":00");
+        displayTomatoClock();
     })
+
+    function displayTomatoClock() {
+        if (!timerStarted) {
+            if (!isBreakTime) {
+                $("#tomato").text(session + ":00");
+            } else {
+                $("#tomato").text(breakLength + ":00");
+            }
+        }
+    }
+
     function reset() {
         timerStarted = false;
         timerIsRunning = false;
         clearInterval(timerFunc);
-        $("#tomato").text(session + ":00");
+        displayTomatoClock();
+    }
+
+    function initializeTimer() {
+        timerIsRunning = true;
+        timerStarted = true;
+        if (!isBreakTime) {
+            runTimer(session * 60);
+        } else {
+            runTimer(breakLength * 60);
+        }
+        var startSnd = new Audio('https://www.soundjay.com/button/sounds/button-6.mp3');
+        startSnd.play();
     }
 
     $("#reset").click(function() {
         reset();
     })
 
-
-    // Start timer
+    // Start timer (click tomato)
     $("#pomodoro, #tomato").click(function() {
         // pause timer if currently running
         if (!timerStarted) {
-            timerIsRunning = true;
-            timerStarted = true;
-            timerFunc(session * 60);
-            var startSnd = new Audio('https://www.soundjay.com/button/sounds/button-6.mp3');
-            startSnd.play();
+            initializeTimer();
         } else {
             if (timerIsRunning) {
                 timerIsRunning = false;
@@ -60,14 +79,16 @@ $(document).ready(function(){
     });
 
     // Timer function (duration in seconds)
-    var timerFunc = function startTimer(duration) {
+    function runTimer(duration) {
         var timer = duration
+        console.log("setTimer function initiated");
         var minutes;
         var seconds;
         var snd = new Audio("https://www.soundjay.com/misc/sounds/bell-ringing-01.mp3");  // setup alarm so it buffers
 
-        setInterval(function () {
+        var timerFunc = setInterval(function () {
             if (timerIsRunning) {
+                console.log("timerFunc started");
                 minutes = parseInt(timer / 60, 10);
                 seconds = parseInt(timer % 60, 10);
 
@@ -77,24 +98,23 @@ $(document).ready(function(){
                 $("#tomato").text(minutes + ":" + seconds);
                 timer--;
 
-                if (timer < 0) {
+                if (timer <= 0) {
                     // Stop timer
                     timerStarted = false;
+                    timerIsRunning = false;
                     // Play alarm
                     snd.play();
                     // Begin break timer
-
-                    timer = duration;
+                    isBreakTime = true;
+                    displayTomatoClock();
                 }
             }
             else {
                 //  ** PAUSE **
             }
         }, 1000);
+
     };
-
-    // Reset button?
-
 
     // Progress bar?
 
