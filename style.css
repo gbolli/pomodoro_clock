@@ -3,36 +3,84 @@ body, div {
   margin:0;
   font-family: 'Indie Flower', cursive;
   background-color: lightblue;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 }
 
 #title {
   margin: auto;
+  margin-top: 30px;
   font-size: 80px;
   text-align: center;
 }
 
-#settings {
-  margin: auto;
+#settings-title {
+  margin: 0 auto;
   width: 600px;
-  height: 100px;
-  background-color: yellow;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#settings-title h4 {
+  width: 170px;
+  margin: 5px 50px;
+  text-align: center;
+}
+
+#settings {
+  margin: 0 auto;
+  width: 600px;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#session {
+  width: 170px;
+  margin: 5px 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#break {
+  width: 170px;
+  margin: 5px 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#session button, #break button {
+  background-color: lightblue;
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  font-size: 32px;
+  border-radius: 5px;
+  box-shadow: 5px;
+}
+
+#session div, #break div {
+  margin: 10px;
+  font-size: 32px;
 }
 
 #pomodoro {
   margin: auto;
-  width: 600px;
+  width: 400px;
   height: 400px;
   background-image: url('https://openclipart.org/image/300px/svg_to_png/239275/1454168849.png&disposition=attachment');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-clip: padding-box;
+  display: flex;
 }
 
 #tomato {
   display: block;
   margin: auto;
-  margin-top: 185px;
-  font-size: 40px;
+  margin-top: 180px;
+  font-size: 50px;
   text-align: center;
 }
+
+button:focus {outline:0;}
