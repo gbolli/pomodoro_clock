@@ -8,7 +8,7 @@ body, div {
 
 #title {
   margin: auto;
-  margin-top: 30px;
+  margin-top: 15px;
   font-size: 80px;
   text-align: center;
 }
@@ -67,7 +67,7 @@ body, div {
 #pomodoro {
   margin: auto;
   width: 400px;
-  height: 400px;
+  height: 350px;
   background-image: url('https://openclipart.org/image/300px/svg_to_png/239275/1454168849.png&disposition=attachment');
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -78,8 +78,14 @@ body, div {
 #tomato {
   display: block;
   margin: auto;
-  margin-top: 180px;
+  margin-top: 155px;
   font-size: 50px;
+  text-align: center;
+}
+
+#guide {
+  margin: auto;
+  font-size: 20px;
   text-align: center;
 }
 
