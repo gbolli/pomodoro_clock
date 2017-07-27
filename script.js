@@ -27,10 +27,7 @@ $(document).ready(function(){
             breakLength++;
             $("#btotal").text(breakLength);
         }
-        
-
-        //  something different if timer is running ??
-
+        $("#tomato").text(session + ":00");
     })
 
 
@@ -79,7 +76,7 @@ $(document).ready(function(){
                 }
             }
             else {
-                
+                //  ** PAUSE **
             }
         }, 1000);
     }
