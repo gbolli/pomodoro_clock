@@ -75,6 +75,10 @@ body, div {
   display: flex;
 }
 
+#pomodoro:hover {
+  background-size: 77%;
+}
+
 #tomato {
   display: block;
   margin: auto;

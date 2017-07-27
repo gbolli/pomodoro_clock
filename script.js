@@ -1,13 +1,14 @@
 $(document).ready(function(){
 
     // Set variables
-    var timer = 25;
     var session = 25;
     var breakLength = 5;
+    var timerStarted = false;
+    var timerIsRunning = false;
 
-    $("#timer").text(timer);
+    $("#tomato").text(session + ":00");
 
-    // Break length setting
+    // Session and Break minutes settings
     $("button").click(function() {
         var action = $(this).attr('id');
         if (action === "sminus") {
@@ -27,22 +28,63 @@ $(document).ready(function(){
             $("#btotal").text(breakLength);
         }
         
-        timer = session;
 
         //  something different if timer is running ??
 
     })
 
-    // Session length setting
-
 
     // Start timer
+    $("#pomodoro, #tomato").click(function() {
+        // pause timer if currently running?
+        if (!timerStarted) {
+            timerIsRunning = true;
+            timerStarted = true;
+            startTimer(session * 60);
+        } else {
+            if (timerIsRunning) {
+                timerIsRunning = false;
+            } else {
+                timerIsRunning = true;
+            }
+        }
+    });
 
+    // Timer function (duration in seconds)
+    function startTimer(duration) {
+        var timer = duration
+        var minutes;
+        var seconds;
 
-    // When timer is finished, play alarm
+        setInterval(function () {
+            if (timerIsRunning) {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
 
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    // Reset
+                $("#tomato").text(minutes + ":" + seconds);
+                timer--;
+
+                if (timer < 0) {
+                    // Stop timer
+                    timerStarted = false;
+                    // Play alarm
+
+                    // Begin break timer
+
+                    timer = duration;
+
+                }
+            }
+            else {
+                
+            }
+        }, 1000);
+    }
+
+    // Reset button?
 
 
     // Progress bar?
