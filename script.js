@@ -9,7 +9,7 @@ $(document).ready(function(){
     $("#tomato").text(session + ":00");
 
     // Session and Break minutes settings
-    $("button").click(function() {
+    $("#settings button").click(function() {
         var action = $(this).attr('id');
         if (action === "sminus") {
             session--;
@@ -30,14 +30,21 @@ $(document).ready(function(){
         $("#tomato").text(session + ":00");
     })
 
+    $("#reset").click(function() {
+        timerStarted = false;
+        timerIsRunning = false;
+        clearInterval(timerFunc);
+        $("#tomato").text(session + ":00");
+    })
+
 
     // Start timer
     $("#pomodoro, #tomato").click(function() {
-        // pause timer if currently running?
+        // pause timer if currently running
         if (!timerStarted) {
             timerIsRunning = true;
             timerStarted = true;
-            startTimer(session * 60);
+            timerFunc(session * 60);
         } else {
             if (timerIsRunning) {
                 timerIsRunning = false;
@@ -48,7 +55,7 @@ $(document).ready(function(){
     });
 
     // Timer function (duration in seconds)
-    function startTimer(duration) {
+    var timerFunc = function startTimer(duration) {
         var timer = duration
         var minutes;
         var seconds;
@@ -70,16 +77,15 @@ $(document).ready(function(){
                     // Play alarm
 
                     // Begin break timer
-
+                    
                     timer = duration;
-
                 }
             }
             else {
                 //  ** PAUSE **
             }
         }, 1000);
-    }
+    };
 
     // Reset button?
 
