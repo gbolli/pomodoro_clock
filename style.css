@@ -23,16 +23,16 @@ body, div {
   margin: auto;
   width: 600px;
   height: 400px;
-  
-}
-
-#pomodoro img {
-  display: block;
-  margin: auto;
-  margin-top: 50px;
-  
+  background-image: url('https://openclipart.org/image/300px/svg_to_png/239275/1454168849.png&disposition=attachment');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-clip: padding-box;
 }
 
 #tomato {
+  display: block;
+  margin: auto;
+  margin-top: 185px;
   font-size: 40px;
+  text-align: center;
 }
