@@ -29,12 +29,15 @@ $(document).ready(function(){
         }
         $("#tomato").text(session + ":00");
     })
-
-    $("#reset").click(function() {
+    function reset() {
         timerStarted = false;
         timerIsRunning = false;
         clearInterval(timerFunc);
         $("#tomato").text(session + ":00");
+    }
+
+    $("#reset").click(function() {
+        reset();
     })
 
 
@@ -45,6 +48,8 @@ $(document).ready(function(){
             timerIsRunning = true;
             timerStarted = true;
             timerFunc(session * 60);
+            var startSnd = new Audio('https://www.soundjay.com/button/sounds/button-6.mp3');
+            startSnd.play();
         } else {
             if (timerIsRunning) {
                 timerIsRunning = false;
@@ -59,6 +64,7 @@ $(document).ready(function(){
         var timer = duration
         var minutes;
         var seconds;
+        var snd = new Audio("https://www.soundjay.com/misc/sounds/bell-ringing-01.mp3");  // setup alarm so it buffers
 
         setInterval(function () {
             if (timerIsRunning) {
@@ -75,9 +81,9 @@ $(document).ready(function(){
                     // Stop timer
                     timerStarted = false;
                     // Play alarm
-
+                    snd.play();
                     // Begin break timer
-                    
+
                     timer = duration;
                 }
             }
