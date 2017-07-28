@@ -1,11 +1,12 @@
 $(document).ready(function(){
 
     // Set variables
-    var session = 25;
+    var session = 0.1; // var session = 25;
     var breakLength = 5;
     var timerStarted = false;
     var timerIsRunning = false;
     var isBreakTime = false;
+    var timerFunc;  // setInterval variable
 
     displayTomatoClock();
 
@@ -42,18 +43,23 @@ $(document).ready(function(){
     }
 
     function reset() {
+        console.log("Reset function run");
         timerStarted = false;
         timerIsRunning = false;
         clearInterval(timerFunc);
+        console.log("Cleared interval?");
         displayTomatoClock();
+        console.log("displayed the clock time from session");
     }
 
     function initializeTimer() {
         timerIsRunning = true;
         timerStarted = true;
         if (!isBreakTime) {
+            console.log("running session runtimer() with value " + session);
             runTimer(session * 60);
         } else {
+            console.log("running breakLength runtimer() with value " + breakLength);
             runTimer(breakLength * 60);
         }
         var startSnd = new Audio('https://www.soundjay.com/button/sounds/button-6.mp3');
@@ -61,6 +67,7 @@ $(document).ready(function(){
     }
 
     $("#reset").click(function() {
+        console.log("reset button click");
         reset();
     })
 
@@ -80,17 +87,23 @@ $(document).ready(function(){
 
     // Timer function (duration in seconds)
     function runTimer(duration) {
-        var timer = duration
-        console.log("setTimer function initiated");
+        var timer = duration;
+        console.log("runTimer function initiated");
+        console.log("timer = " + timer + " : duration = " + duration);
         var minutes;
+        console.log("initiated minutes = " + minutes);
         var seconds;
-        var snd = new Audio("https://www.soundjay.com/misc/sounds/bell-ringing-01.mp3");  // setup alarm so it buffers
+        console.log("initiated seconds = " + seconds);
 
-        var timerFunc = setInterval(function () {
+        // Why isn't this timerFunc running properly the second time?   Minutes and Seconds calculating as 0 for breakLength run
+
+        timerFunc = setInterval(function () {
             if (timerIsRunning) {
                 console.log("timerFunc started");
                 minutes = parseInt(timer / 60, 10);
+                console.log("minutes set to " + minutes + "timer: " + timer);
                 seconds = parseInt(timer % 60, 10);
+                console.log("seconds set to " + seconds);
 
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -103,6 +116,8 @@ $(document).ready(function(){
                     timerStarted = false;
                     timerIsRunning = false;
                     // Play alarm
+                    console.log("playing finish sound");
+                    var snd = new Audio("https://www.soundjay.com/misc/sounds/bell-ringing-01.mp3");
                     snd.play();
                     // Begin break timer
                     isBreakTime = true;
@@ -114,7 +129,7 @@ $(document).ready(function(){
             }
         }, 1000);
 
-    };
+    }
 
     // Progress bar?
 
